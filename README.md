@@ -18,7 +18,7 @@ If you use this framework or data in your research, please cite:
 
 ```
 SY142-Game-Theory-1/
-├── R/
+├── R-Codes/
 │   ├── TamSimulasyon.R           # Core simulation engine (all functions)
 │   ├── RunAll.R                  # Main analysis script (runs all analyses)
 │   ├── FiguresGeneration.R       # Figure generation (supplementary figures)
@@ -58,7 +58,7 @@ install.packages(c("ggplot2", "patchwork", "readxl"))
 ### Running the Complete Analysis
 
 ```r
-source("R/TamSimulasyon.R")
+source("R-Codes/TamSimulasyon.R")
 results <- run_comprehensive_analysis()
 export_results_to_csv(results)
 ```
