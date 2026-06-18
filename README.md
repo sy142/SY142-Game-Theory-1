@@ -75,7 +75,7 @@ This executes:
 ### Running the Extended Tournament
 
 ```r
-source("R/TamSimulasyon.R")
+source("R-Codes/TamSimulasyon.R")
 extended <- run_extended_strategy_analysis()
 ```
 
@@ -84,7 +84,7 @@ This evaluates 22 strategies with 200 simulations per matchup (96,800 total runs
 ### Generating Paper Figures
 
 ```r
-source("R/GenerateFigures_Paper.R")
+source("R-Codes/GenerateFigures_Paper.R")
 ```
 
 Generates Figures 2–5 at 600 DPI in PNG and PDF formats.
