@@ -1,7 +1,7 @@
 rm(list = ls())
 gc()
 
-base_dir <- "C:/Users/Salim/Desktop/makaleler/Oyun Teorisi diyetisyen"
+base_dir <- tryCatch(dirname(rstudioapi::getActiveDocumentContext()$path), error = function(e) getwd())
 sim_dir <- file.path(base_dir, "simulation")
 fig_dir <- file.path(base_dir, "Figures")
 
