@@ -1,8 +1,9 @@
 library(ggplot2)
 library(patchwork)
 
-fig_dir  <- "C:/Users/Salim/Desktop/makaleler/Oyun Teorisi diyetisyen/Mathematics/Figures"
-data_dir <- "C:/Users/Salim/Desktop/makaleler/Oyun Teorisi diyetisyen/Mathematics/simulation"
+base_dir <- tryCatch(dirname(rstudioapi::getActiveDocumentContext()$path), error = function(e) getwd())
+fig_dir  <- file.path(dirname(base_dir), "figures")
+data_dir <- file.path(dirname(base_dir), "data")
 dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 
 tournament_df     <- read.csv(file.path(data_dir, "tournament_rankings.csv"))
