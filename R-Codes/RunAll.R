@@ -1,9 +1,9 @@
 rm(list = ls())
 gc()
 
-base_dir <- "C:/Users/Salim/Desktop/makaleler/Oyun Teorisi diyetisyen"
+base_dir <- tryCatch(dirname(rstudioapi::getActiveDocumentContext()$path), error = function(e) getwd())
 output_dir <- file.path(base_dir, "simulation")
-
+                     
 if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 if (!dir.exists(file.path(output_dir, "results"))) dir.create(file.path(output_dir, "results"), recursive = TRUE)
 if (!dir.exists(file.path(output_dir, "plots"))) dir.create(file.path(output_dir, "plots"), recursive = TRUE)
@@ -93,10 +93,10 @@ cat("\n==========================================\n")
 cat("ADIM 6/6: TABLOLAR VE GRAFIKLER\n")
 cat("==========================================\n\n")
 
-setwd("C:/Users/Salim/Desktop/makaleler/Oyun Teorisi diyetisyen/simulation")
+setwd(output_dir)
 dir.create("plots", showWarnings = FALSE)
 dir.create("results", showWarnings = FALSE)
-
+                     
 write.csv(results$mc_coop$results, "results/monte_carlo_coop_results.csv", row.names = FALSE)
 write.csv(results$mc_nash$results, "results/monte_carlo_nash_results.csv", row.names = FALSE)
 write.csv(results$mc_coop$monthly_data[[1]], "results/sample_simulation_monthly.csv", row.names = FALSE)
