@@ -6,7 +6,7 @@ fig_dir  <- file.path(dirname(base_dir), "figures")
 data_dir <- file.path(dirname(base_dir), "data")
 dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 
-tournament_df     <- read.csv(file.path(data_dir, "tournament_rankings.csv"))
+tournament_df     <- read.csv(file.path(data_dir, "extended_strategy_rankings.csv"))
 mc_coop_df        <- read.csv(file.path(data_dir, "monte_carlo_coop_results.csv"))
 mc_nash_df        <- read.csv(file.path(data_dir, "monte_carlo_nash_results.csv"))
 sample_sim_df     <- read.csv(file.path(data_dir, "sample_simulation_monthly.csv"))
@@ -37,12 +37,14 @@ tournament_df$strategy_en <- gsub("S2_Sabit", "S2 Fixed", tournament_df$strategy
 tournament_df$strategy_en <- gsub("S3_Sabit", "S3 Fixed", tournament_df$strategy_en)
 tournament_df$strategy_en <- gsub("S4_Sabit", "S4 Fixed", tournament_df$strategy_en)
 tournament_df$strategy_en <- gsub("_", " ", tournament_df$strategy_en)
-tournament_df$strategy_en <- gsub("Tit for Tat", "Tit-for-Tat", tournament_df$strategy_en)
 tournament_df <- tournament_df[order(-tournament_df$average_npv), ]
-tournament_df$color_group <- ifelse(
-  tournament_df$strategy_en %in% c("Forgiving TfT", "Grim Trigger", "Tit-for-Tat"), "Reciprocity",
-  ifelse(tournament_df$strategy_en %in% c("S2 Fixed", "S1 Fixed"), "Aggressive",
-         "Context-dependent"))
+tournament_df$color_group <- with(tournament_df, ifelse(
+  grepl("TfT|TitForTat|Forgiving|Grim", strategy_en), "Reciprocity",
+  ifelse(grepl("^S1", strategy_en), "Destructive",
+  ifelse(grepl("^S2", strategy_en), "Aggressive",
+  ifelse(grepl("^S3", strategy_en), "Cooperative",
+  ifelse(grepl("^S4", strategy_en), "Premium",
+         "Context-dependent"))))))
 
 fig2 <- ggplot(tournament_df,
                aes(x = reorder(strategy_en, average_npv),
@@ -53,17 +55,20 @@ fig2 <- ggplot(tournament_df,
             hjust = -0.3, size = 3.2, fontface = "bold", family = "serif") +
   coord_flip() +
   scale_fill_manual(
-    values = c("Reciprocity" = "#2E86AB",
+    values = c("Reciprocity"       = "#2E86AB",
                "Context-dependent" = "#7FB069",
-               "Aggressive" = "#D73027"),
+               "Cooperative"       = "#27AE60",
+               "Aggressive"        = "#E8943A",
+               "Premium"           = "#8E44AD",
+               "Destructive"       = "#D73027"),
     name = "Strategy Type") +
   scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
   labs(x = NULL, y = "Average NPV (Million TL)") +
   theme_paper +
   theme(legend.position = "right", panel.grid.major.y = element_blank())
 
-ggsave(file.path(fig_dir, "Figure2_Tournament.png"), fig2, width = 10, height = 6, dpi = 600)
-ggsave(file.path(fig_dir, "Figure2_Tournament.pdf"), fig2, width = 10, height = 6)
+ggsave(file.path(fig_dir, "Figure2_Tournament.png"), fig2, width = 10, height = 8, dpi = 600)
+ggsave(file.path(fig_dir, "Figure2_Tournament.pdf"), fig2, width = 10, height = 8)
 cat("Figure 2 saved.\n")
 
 mc_long <- data.frame(
