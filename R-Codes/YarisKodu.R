@@ -1,3 +1,6 @@
+# Standalone tournament runner. The canonical published pipeline is RunAll.R
+# (extended tournament, 200 sims/matchup, 96,800 total runs). Parameter block
+# here is duplicated from TamSimulasyon.R - keep in sync.
 rm(list = ls())
 gc()
 
@@ -52,7 +55,7 @@ sim_params <- list(
   
   price_levels = data.frame(
     level = 1:4,
-    strategy = c("Yikici", "Agresif", "Isbirlikci", "Premium"),
+    strategy = c("Destructive", "Aggressive", "Cooperative", "Premium"),
     package_price = c(3200, 5500, 7200, 10500),
     variable_cost = c(280, 500, 1200, 1100),
     contribution_margin = c(2920, 5000, 6000, 9400),
@@ -61,7 +64,7 @@ sim_params <- list(
   
   marketing_levels = data.frame(
     level = 0:3,
-    strategy = c("Yok", "Dusuk", "Orta", "Yuksek"),
+    strategy = c("None", "Basic", "Active", "Intensive"),
     monthly_cost = c(0, 15000, 35000, 70000),
     market_share_effect = c(0.00, 0.02, 0.05, 0.08)
   ),
@@ -78,7 +81,7 @@ sim_params <- list(
   
   investments = data.frame(
     code = c("T", "E", "D", "C"),
-    name = c("Teknoloji", "Egitim", "Dekorasyon", "Cihaz"),
+    name = c("Technology", "Training", "Decoration", "Equipment"),
     cost = c(60000, 40000, 50000, 80000),
     duration_months = c(12, 12, 12, 12),
     capacity_effect = c(0.15, 0.00, 0.00, 0.00),
@@ -642,7 +645,7 @@ run_single_simulation <- function(strategy_A, strategy_B,
 }
 
 
-N_SIMS_PER_MATCH <- 30
+N_SIMS_PER_MATCH <- 200
 VALID_PRICES     <- 1:4
 VALID_MARKETING  <- 0:3
 VALID_SHOCKS     <- c("ekonomik_kriz", "rakip_skandal", "viral_basari",
