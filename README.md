@@ -16,7 +16,7 @@ All analyses use a fixed seed, `set.seed(2026)`, defined in `TamSimulasyon.R`. R
 
 ## Artifact map
 
-`R-Codes/TamSimulasyon.R` is the core simulation engine and holds all model parameters (`sim_params`). `R-Codes/RunAll.R` is the canonical pipeline: it runs every analysis and writes all `results/*.csv`, including the illustrative `sample_simulation_monthly.csv`, which is taken from the first Monte-Carlo cooperative run (`results$mc_coop$monthly_data[[1]]`). `R-Codes/FiguresGeneration.R` generates plots from the committed CSVs, including the Figure-4 panels built from that illustrative sample. `R-Codes/GenerateFigures_Paper.R` produces the paper-specific figures (Figures 2-5). `R-Codes/YarisKodu.R` is a standalone tournament runner; it duplicates the `sim_params` block from `TamSimulasyon.R` (keep the two in sync) and runs 200 sims per matchup to match the published results.
+`R-Codes/TamSimulasyon.R` is the core simulation engine and holds all model parameters (`sim_params`). `R-Codes/RunAll.R` is the canonical pipeline: it runs every analysis and writes all `results/*.csv`, including the illustrative `sample_simulation_monthly.csv`, which is taken from the first Monte-Carlo cooperative run (`results$mc_coop$monthly_data[[1]]`). `R-Codes/GenerateFigures_Paper.R` generates the paper figures (Figures 2-5) from the committed CSVs, including the Figure-4 panels built from that illustrative sample. `R-Codes/YarisKodu.R` is a standalone tournament runner; it duplicates the `sim_params` block from `TamSimulasyon.R` (keep the two in sync) and runs 200 sims per matchup to match the published results.
 
 ## Key facts
 
