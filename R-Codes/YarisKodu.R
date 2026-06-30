@@ -1,3 +1,6 @@
+# Standalone tournament runner. The canonical published pipeline is RunAll.R
+# (extended tournament, 200 sims/matchup, 96,800 total runs). Parameter block
+# here is duplicated from TamSimulasyon.R - keep in sync.
 rm(list = ls())
 gc()
 
@@ -642,7 +645,7 @@ run_single_simulation <- function(strategy_A, strategy_B,
 }
 
 
-N_SIMS_PER_MATCH <- 30
+N_SIMS_PER_MATCH <- 200
 VALID_PRICES     <- 1:4
 VALID_MARKETING  <- 0:3
 VALID_SHOCKS     <- c("ekonomik_kriz", "rakip_skandal", "viral_basari",
